@@ -29,3 +29,15 @@ jobs:
           go build -o ../../uniproxy.exe -ldflags '-s -w' -gcflags="all=-trimpath=${PWD}" -asmflags="all=-trimpath=${PWD}" -tags "with_quic with_gvisor with_grpc with_utls"
           cd ../reset || exit
           go build -o ../../reset.exe -ldflags '-s -w' -gcflags="all=-trimpath=${PWD}" -asmflags="all=-trimpath=${PWD}"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+          name: uniproxy.exe
+          path: ./uniproxy.exe
+          if-no-files-found: error
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+          name: reset.exe
+          path: ./reset.exe
+          if-no-files-found: error
